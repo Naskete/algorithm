@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedSubPath {
+    // 1367. Linked List in Binary Tree
     public boolean isSubPath(ListNode head, TreeNode root) {
         List<TreeNode> treeNodes = new ArrayList<>();
         findHead(root, head.val, treeNodes);
@@ -41,5 +42,18 @@ public class LinkedSubPath {
         if (root.right != null) {
             findHead(root.right, val, treeNodes);
         }
+    }
+
+    public boolean solution(ListNode head, TreeNode root) {
+        return dfs(head, head, root);
+    }
+
+    boolean dfs(ListNode head, ListNode cur, TreeNode root) {
+        if(cur == null) return true;
+        if(root == null) return false;
+        if(cur.val == root.val) cur = cur.next;
+        else if (head.val == root.val) head = head.next;
+        else cur = head;
+        return dfs(head, cur, root.left) || dfs(head, cur, root.right);
     }
 }
