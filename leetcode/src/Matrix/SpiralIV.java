@@ -5,24 +5,8 @@ import LinkedList.ListNode;
 import java.util.Arrays;
 
 public class SpiralIV {
-    public static void main(String[] args) {
-        ListNode node = new ListNode(3);
-        node.next = new ListNode(0);
-        node.next.next = new ListNode(2);
-        node.next.next.next = new ListNode(6);
-        node.next.next.next.next = new ListNode(8);
-        node.next.next.next.next.next = new ListNode(1);
-        node.next.next.next.next.next.next = new ListNode(7);
-        node.next.next.next.next.next.next.next = new ListNode(9);
-        node.next.next.next.next.next.next.next.next = new ListNode(4);
-        node.next.next.next.next.next.next.next.next.next = new ListNode(2);
-        node.next.next.next.next.next.next.next.next.next.next = new ListNode(5);
-        node.next.next.next.next.next.next.next.next.next.next.next = new ListNode(5);
-        node.next.next.next.next.next.next.next.next.next.next.next.next = new ListNode(0);
-        System.out.println(Arrays.deepToString(spiralMatrix(3, 5, node)));
-    }
-
-    public static int[][] spiralMatrix(int m, int n, ListNode head) {
+    // 2326. Spiral Matrix IV
+    public int[][] spiralMatrix(int m, int n, ListNode head) {
         int[][] res = new int[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -33,32 +17,32 @@ public class SpiralIV {
         return res;
     }
 
-    private static void fillMatrix(int x, int y, int startX, int startY, int endX, int endY, ListNode head, int[][] res) {
-        if (startX > endX || startY > endY || head == null) {
+    private void fillMatrix(int x, int y, int startX, int startY, int endX, int endY, ListNode head, int[][] res) {
+        if (x > endX || y > endY || head == null) {
             return;
         }
-        while (y < endY && head.next != null) {
+        while (y <= endY && head != null) {
             res[x][y] = head.val;
             y++;
             head = head.next;
         }
         x = startX + 1;
-        y = endY - 1;
-        while (x < endX && head.next != null) {
+        y = endY;
+        while (x <= endX && head != null) {
             res[x][y] = head.val;
             head = head.next;
             x++;
         }
-        y = endY - 2;
-        x = endX - 1;
-        while (y > startX && head.next != null) {
+        y = endY - 1;
+        x = endX;
+        while (y >= startX && head != null) {
             res[x][y] = head.val;
             head = head.next;
             y--;
         }
-        x = endX - 2;
+        x = endX - 1;
         y = startY;
-        while (x > startY && head.next != null) {
+        while (x > startY && head != null) {
             res[x][y] = head.val;
             head = head.next;
             x--;
