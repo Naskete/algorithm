@@ -25,6 +25,31 @@ public class CountVowel {
         return res;
     }
 
+
+    public int[] vowelStringsI(String[] words, int[][] queries) {
+        int n = words.length;
+        int[] vowel = new  int[n];
+        for (int i = 0; i < n; i++) {
+            vowel[i] = vowelWord(words[i]) ? 1: 0;
+        }
+        int[] res = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int l = queries[i][0];
+            int r = queries[i][1];
+            while (l <= r) {
+                if (l == r) {
+                    res[i] += vowel[l];
+                    break;
+                }
+                res[i] += vowel[l];
+                res[i] += vowel[r];
+                l++;
+                r--;
+            }
+        }
+        return res;
+    }
+
     private boolean vowelWord(String word) {
         if (word.startsWith("a") || word.startsWith("e") || word.startsWith("u") || word.startsWith("i") || word.startsWith("o")) {
             return word.endsWith("a") || word.endsWith("i") || word.endsWith("u") || word.endsWith("e") || word.endsWith("o");
