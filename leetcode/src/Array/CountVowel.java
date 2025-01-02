@@ -56,4 +56,21 @@ public class CountVowel {
         }
         return false;
     }
+
+    public int[] vowelStringsII(String[] words, int[][] queries) {
+        int n = words.length;
+        int[] vowel = new  int[n];
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += vowelWord(words[i]) ? 1: 0;
+            vowel[i] = sum;
+        }
+        int[] res = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int l = queries[i][0];
+            int r = queries[i][1];
+            res[i] = vowel[r] - (l == 0 ? 0 : vowel[l - 1]);
+        }
+        return res;
+    }
 }
