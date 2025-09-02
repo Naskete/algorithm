@@ -1,5 +1,7 @@
 package Tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class TreeNode {
@@ -29,7 +31,7 @@ public class TreeNode {
         preOrderTravel(root.right);
     }
 
-    // 先序遍历
+    // 先序遍历 DFS
     // 1. 根入栈中
     // 2. 打印（处理）弹出节点
     // 3. 压入右孩子，再压入左孩子
@@ -118,6 +120,24 @@ public class TreeNode {
                 root = stack.pop();
                 System.out.println(root.val);
                 root = root.right;
+            }
+        }
+    }
+
+    // BFS
+    public static void levelTravel(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node.left != null) {
+                queue.add(node.left);
+            }
+            if (node.right != null) {
+                queue.add(node.right);
             }
         }
     }
