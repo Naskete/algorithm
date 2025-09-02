@@ -51,4 +51,43 @@ public class TreeNode {
             }
         }
     }
+
+    // 后序遍历
+    public static void posOrderTravel(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        posOrderTravel(root.left);
+        posOrderTravel(root.right);
+        System.out.println(root.val);
+    }
+
+    // 后序遍历
+    // 1. 压入节点
+    // 2. 弹出当前节点cur
+    // 3. cur放入辅助栈
+    // 4. 先加入左孩子，再加右孩子
+    // 5. 循环
+    public static void posOrderTravelUnRecur(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> orderStack = new Stack<>();
+        Stack<TreeNode> collectStack = new Stack<>();
+        orderStack.add(root);
+        while (!orderStack.isEmpty()) {
+            TreeNode node = orderStack.pop();
+            collectStack.add(node);
+            if (node.left != null) {
+                orderStack.add(node.left);
+            }
+            if (node.right != null) {
+                orderStack.add(node.right);
+            }
+        }
+        while (!collectStack.isEmpty()) {
+            TreeNode node = collectStack.pop();
+            System.out.println(node.val);
+        }
+    }
 }
