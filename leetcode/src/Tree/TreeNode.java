@@ -90,4 +90,35 @@ public class TreeNode {
             System.out.println(node.val);
         }
     }
+
+    // 中序遍历
+    public static void inOrderTravel(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        inOrderTravel(root.left);
+        System.out.println(root.val);
+        inOrderTravel(root.right);
+    }
+
+    // 中序遍历
+    // 1. 整个树左树进
+    // 2. 弹出打印(处理)，同时对弹出节点的右数做同样的操作
+    // 3. 循环
+    public static void  inOrderTravelUnRecur(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.add(root);
+                root = root.left;
+            } else {
+                root = stack.pop();
+                System.out.println(root.val);
+                root = root.right;
+            }
+        }
+    }
 }
