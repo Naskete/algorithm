@@ -188,4 +188,36 @@ public class TreeNode {
         }
         return true;
     }
+
+    // 判断完全二叉树
+    // 1. 任意节点不存在 有右子树 且 没有左子树
+    // 2. 满足1的前提下，遇到第一个子数不全的情况，后面遇到的应该都是叶节点
+    public static boolean checkCBT(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean flag = false;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            TreeNode left = node.left;
+            TreeNode right = node.right;
+            if (left == null && right != null)  {
+                return false;
+            }
+            if (flag && (left != null || right != null)) {
+                return false;
+            }
+            if (left != null) {
+                queue.add(left);
+            }
+            if (right != null) {
+                queue.add(right);
+            }
+            if (left != null && right == null) {
+                flag = true;
+            }
+        }
+    }
 }
