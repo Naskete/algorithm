@@ -141,4 +141,51 @@ public class TreeNode {
             }
         }
     }
+
+
+    // 搜索二叉树
+    // 对节点root，左子节点比它小，右子节点比它大
+
+    public static int preVal = Integer.MIN_VALUE;
+
+    public static boolean checkBST(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        boolean isLeftBST = checkBST(root.left);
+        if (!isLeftBST) {
+            return false;
+        }
+        if (root.val <= preVal) {
+            return false;
+        } else {
+            preVal = root.val;
+        }
+        return checkBST(root.right);
+    }
+
+    public static boolean checkBSTUnRecur(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        int pre = Integer.MIN_VALUE;
+        while (!stack.isEmpty() || root != null) {
+            if (root != null) {
+                stack.add(root);
+                root = root.left;
+            } else {
+                root = stack.pop();
+                // 中序处理部分
+                if (root.val <= pre) {
+                    return false;
+                } else {
+                    pre = root.val;
+                }
+                //
+                root = root.right;
+            }
+        }
+        return true;
+    }
 }
