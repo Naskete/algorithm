@@ -221,4 +221,61 @@ public class TreeNode {
         }
         return true;
     }
+
+    static class Info {
+        public int height;
+        public int nodes;
+        public boolean isBalance;
+
+        public Info(int height, boolean isBalance) {
+            this.height = height;
+            this.isBalance = isBalance;
+        }
+
+        public Info(int height, int nodes) {
+            this.height = height;
+            this.nodes = nodes;
+        }
+    }
+
+    // 判断满二叉树
+    // 最大深度l 节点数 n => n = 2^l - 1
+    public static boolean isFullTree(TreeNode root) {
+        Info info = processFull(root);
+        return ((2 ^ info.height - 1) == info.nodes);
+    }
+
+    private static Info processFull(TreeNode root) {
+        if (root == null) {
+            return new Info(0, 0);
+        }
+        Info leftInfo = processFull(root.left);
+        Info rightInfo = processFull(root.right);
+        int height = Math.max(leftInfo.height, rightInfo.height) + 1;
+        int nodes = leftInfo.nodes + rightInfo.nodes + 1;
+        return new Info(height, nodes);
+    }
+
+
+    // 平衡二叉树
+    // 任何一棵树，左树右树高度差不超过1
+    // 1. 左树是
+    // 2. 右树是
+    // 3. |左高 - 右高| <= 1
+
+    public static Info process(TreeNode root) {
+        if (root == null) {
+            return new Info(0, true);
+        }
+        Info leftInfo = process(root.left);
+        Info rightInfo = process(root.right);
+        int height = Math.max(leftInfo.height, rightInfo.height) + 1;
+        boolean isBalance = leftInfo.isBalance && rightInfo.isBalance
+                && Math.abs(leftInfo.height - rightInfo.height) < 2;
+        return new Info(height, isBalance);
+    }
+
+    public static boolean isBalance(TreeNode root) {
+        return process(root).isBalance;
+    }
 }
