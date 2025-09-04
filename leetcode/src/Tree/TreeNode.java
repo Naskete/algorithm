@@ -278,4 +278,24 @@ public class TreeNode {
     public static boolean isBalance(TreeNode root) {
         return process(root).isBalance;
     }
+
+    // 折纸问题
+    public void printAll(int n) {
+        if (n == 0) {
+            return;
+        }
+        printAllFold(1, n, true);
+    }
+
+    // down == true 表示正向，false表示反向
+    private void printAllFold(int i, int n, boolean down) {
+        if (i > n) {
+            return;
+        }
+        printAllFold(i + 1, n, true);
+        System.out.println(down);
+        printAllFold(i + 1, n, false);
+    }
+
+
 }
