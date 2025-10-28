@@ -1,4 +1,4 @@
-package Hot150;
+package Hot150and100;
 
 public class RemoveDuplicates {
     public int removeDuplicates(int[] nums) {

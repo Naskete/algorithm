@@ -1,4 +1,4 @@
-package Hot150;
+package Hot150and100;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package Hot150;
+package Hot150and100;
 
 public class MaxArea {
     public int maxArea(int[] height) {
