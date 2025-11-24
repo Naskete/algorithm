@@ -8,11 +8,9 @@ public class PrefixesDivByFive {
         int n = nums.length;
         List<Boolean> ans = new ArrayList<>();
         int sum = 0;
-        for (int i = 0; i < n; i++) {
-            sum <<= 1;
-            sum += nums[i];
-            ans.add(sum % 5 == 0);
-            sum %= 5;
+        for (int num : nums) {
+            sum = ((sum << 1) + num) % 5;
+            ans.add(sum == 0);
         }
         return ans;
     }
